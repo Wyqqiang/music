@@ -5,11 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jQuery和CSS3响应式TAB选项卡样式幻灯片特效|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+
     <link rel="stylesheet" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/htmleaf-demo.css">
+    <link rel="stylesheet" type="/static/text/css" href="css/htmleaf-demo.css">
     <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/default.css">
+    <link href="/static/css/pagination.css" rel="stylesheet" type="text/css">
 </head>
+<style type="text/css">
+    ul, li{
+        list-style: none;
+    }
+    #wrapper{
+        /*width: 900px;*/
+        margin: 20px auto;
+    }
+    .data-container{
+        margin-top: 5px;
+    }
+    .data-container ul{
+        padding: 0;
+        margin: 0;
+    }
+    .data-container li{
+        margin-bottom: 5px;
+        padding: 5px 10px;
+        background: #66677c;
+        color: #fff;
+    }
+</style>
 <body>
 <!--<header class="htmleaf-header">
     <h1>jQuery和CSS3响应式TAB选项卡样式幻灯片特效 <span>CSS3 Animated Responsive Tab Slider Plugin For jQuery</span></h1>
@@ -43,17 +69,36 @@
                     <div class="ts-banner"> <img src="/static/img/621.jpg" alt="alt goes here" /> </div>
                     <div class="ts-container set-layout thumb-cont">
                         <div class="ts-thumbnail"> <img src="/static/img/iphone.png" alt="alt" /> </div>
-                        <div class="ts-content">
-                            <!--<div class="ts-title"> 进来听歌呗 </div>-->
-                            <a href="/sing"  > <span>不来听首歌吗？</span> <small>music</small> <i class="fa fa-arrow-circle-right"></i> </a> </div>
+                        <article class="htmleaf-container">
+                            <div id="wrapper">
+                                <section>
+                                    <div class="data-container"></div>
+                                    <div id="pagination-demo1"></div>
+                                </section>
+                            </div>
+                        </article>
+                        <!--<div class="ts-content">
+                          <div class="ts-title"> 进来听歌呗 </div>
+                              <a href="" class="ts-btn pull-right set-icon to-right">
+                                  <span>不来听首歌吗？</span>
+                                  <small>music</small>
+                                  <i class="fa fa-arrow-circle-right"></i>
+                              </a>
+                        </div>-->
                     </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-10"><audio  style="width: 80%" controls="controls"  src="file/你是人间四月天（翻自 解忧邵帅）.mp3" id="music" ></audio></div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- Single item -->
                 <div class="ts-item">
-                    <div class="ts-banner"> <img src="static/img/622.jpg" alt="alt goes here" /></div>
+                    <div class="ts-banner"> <img src="/static/img/622.jpg" alt="alt goes here" /></div>
                     <div class="ts-container set-layout thumb-cont">
-                        <div class="ts-thumbnail"> <img src="static/img/s3.png" alt="alt" /> </div>
+                        <div class="ts-thumbnail"> <img src="/static/img/s3.png" alt="alt" /> </div>
                         <div class="ts-content">
                             <!-- <div class="ts-title"> 上传歌曲 </div>-->
                             <a href="" class="ts-btn pull-right set-icon to-right"> <span>我也传首歌</span> <small></small> <i class="fa fa-arrow-circle-right"></i> </a> </div>
@@ -62,9 +107,9 @@
 
                 <!-- Single item -->
                 <div class="ts-item">
-                    <div class="ts-banner"> <img src="static/img/623.jpg" alt="alt goes here" /> </div>
+                    <div class="ts-banner"> <img src="/static/img/623.jpg" alt="alt goes here" /> </div>
                     <div class="ts-container set-layout thumb-cont">
-                        <div class="ts-thumbnail"> <img src="static/img/lumia.png" alt="alt" /> </div>
+                        <div class="ts-thumbnail"> <img src="/static/img/lumia.png" alt="alt" /> </div>
                         <div class="ts-content">
                             <a href="" class="ts-btn pull-right set-icon to-right" style="background: #3498DB;margin-bottom: 10px;">
                                 <span>偷看下别人的留言，咳咳</span>
@@ -79,10 +124,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
+
+        <!--/tabSlider-->
 </section>
+<!--<th th:text="${songs}">状态变量：even****</th>-->
 <!--<footer class="related">
     <h3>如果你喜欢这个插件，那么你可能也喜欢:</h3>
     <a href="http://www.htmleaf.com/jQuery/Slideshow-Scroller/jquery-fractionslider.html">
@@ -94,11 +142,13 @@
       <h3>创意jQuery和CSS3滑动覆盖响应式幻灯片特效</h3>
     </a>
 </footer>-->
-
+<p></p>
 <script src="/static/js/jquery-2.1.1.min.js"></script>
+<script src="/static/js/pagination.js"></script>
 <script type="text/javascript">
+alert([[${songs}]])
     $(function(){
-        //$('a').on('click', function(){ return false; });
+        $('a').on('click', function(){ return false; });
 
         // set item banner
         $('.ts-item').first().show();
@@ -124,6 +174,60 @@
         });
 
         var ww = $(window).width();
+    });
+    $(function(){
+
+        function createDemo(name){
+            var container = $('#pagination-' + name);
+            var sources = function(){
+                var result = [];
+
+                for(var i = 1; i < 196; i++){
+                    var obj={
+                        name:"zhangsan",
+                        age:12
+                    }
+                    result.push(obj);
+                }
+
+                return result;
+            }();
+
+            var options = {
+                dataSource: sources,
+                className: 'paginationjs-theme-blue',
+                callback: function(response, pagination){
+                    window.console && console.log(response, pagination);
+
+                    var dataHtml = '<ul>';
+
+                    $.each(response, function(index, item){
+                        dataHtml += '<li>'+ item.name +item.age+'</li>';
+                    });
+
+                    dataHtml += '</ul>';
+
+                    container.prev().html(dataHtml);
+                }
+            };
+
+            //$.pagination(container, options);
+
+            container.addHook('beforeInit', function(){
+                window.console && console.log('beforeInit...');
+            });
+            container.pagination(options);
+
+            container.addHook('beforePageOnClick', function(){
+                window.console && console.log('beforePageOnClick...');
+                //return false
+            });
+
+            return container;
+        }
+
+        createDemo('demo1');
+
     });
 </script>
 </body>

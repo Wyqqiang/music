@@ -33,14 +33,14 @@ body{
 }
 .music-lgin-dh:before{
 	content: '';
-	width: 49px;
-	height: 22px;
-	border-radius: 50%;
-	box-shadow: 0 -2px 0 1px #1a252f;
-	transform: translateX(24px) rotateZ(-53deg);
-	position: absolute;
-	right: 40px;
-	border: 1px solid violet;
+    width: 49px;
+    height: 22px;
+    border-radius: 50%;
+    box-shadow: 0 -2px 0 1px #1a252f;
+    transform: translateX(24px) rotateZ(-53deg);
+    position: absolute;
+    right: 40px;
+    border: 1px solid violet;
 }
 
 .music-lgin-all {
@@ -417,14 +417,14 @@ body{
 	box-shadow: 0 -2px 0 1px #1a252f;
 	transform: translateX(50px) rotateZ(-171deg);
 	position: absolute;
-	/*	border-bottom: 1px solid #3f3f3d;*/
+/*	border-bottom: 1px solid #3f3f3d;*/
 	top: -4px;
 	right: 50px;
 }
 
 .music-mouth-ds {
 	animation: mouth 3s linear infinite;
-
+	
 }
 
 @keyframes mouth {
@@ -432,10 +432,10 @@ body{
 		transform: rotateZ(-170deg);
 		height: 12px;
 	}
-	25% {
+	25% {	
 		transform: rotateZ(-190deg);
 		height: 8px;
-
+		
 	}
 	50% {
 		transform: rotateZ(-210deg);
@@ -456,7 +456,7 @@ body{
 	position: absolute;
 	left: 0;
 	bottom: 0;
-
+	
 }
 .music-shoulder{
 	width: 20px;

@@ -18,7 +18,7 @@ public class MvcConfig extends WebMvcConfigurationSupport {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //registry.addResourceHandler("/css/**","/js/**").addResourceLocations("classpath:/static/css/","classpath:/static/js/");
-        registry.addResourceHandler("/static/css/**","/static/js/**").addResourceLocations("classpath:/static/css/","classpath:/static/js/");
+        registry.addResourceHandler("/static/css/**","/static/js/**","static/img/**").addResourceLocations("classpath:/static/css/","classpath:/static/js/","classpath:/static/img/");
         //下面的这种写法，页面引入的时候前缀需要加上static，addResourceHandler只是一个逻辑的地址，不是实际地址，addResourceLocations是真正的地址
     }
 }
