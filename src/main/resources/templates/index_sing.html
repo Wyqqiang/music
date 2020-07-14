@@ -147,7 +147,9 @@
 <script src="/static/js/pagination.js"></script>
 <!--这个标签很重要th:inline，如果没有的话，不能得到list中的值-->
 <script type="text/javascript" th:inline="javascript">
-    console.log("test"+[[${size}]]+"===="+[[${songs.get(0)}]])
+
+
+
     $(function(){
         $('a').on('click', function(){ return false; });
 
@@ -177,23 +179,35 @@
         var ww = $(window).width();
     });
     $(function(){
-
         function createDemo(name){
             var container = $('#pagination-' + name);
             // var sources = function(){
             //     var result = [];
+            //     for(var i = 0; i < 196; i++){
             //
-            //     for(var i = 0; i < [[${size}]]; i++){
-            //         [[${songs.get(0)}]];
-            //        var tem=[[${songs.get(i)}]];
-            //        result.push(tem)
+            //        result.push(i)
             //     }
             //
             //     return result;
             // }();
-
+            var sources;
+            $.ajax({
+                type: "post",
+                url: "/data",
+                async:false, // 异步请求
+                cache:false, // 设置为 false 将不缓存此页面
+                dataType: 'json', // 返回对象
+                success: function(data) {
+                    sources=data;
+                    //console.log(data);
+                },
+                error: function(data) {
+                    // 请求失败函数
+                    console.log(data);
+                }
+            })
             var options = {
-                dataSource: [[${songs}]],
+                dataSource: sources,
                 className: 'paginationjs-theme-blue',
                 callback: function(response, pagination){
                     window.console && console.log(response, pagination);
@@ -201,7 +215,7 @@
                     var dataHtml = '<ul>';
 
                     $.each(response, function(index, item){
-                        dataHtml += '<li>'+ item.name+'</li>';
+                        dataHtml += '<li>'+ item.name+"   "+item.id + '</li>';
                     });
 
                     dataHtml += '</ul>';
