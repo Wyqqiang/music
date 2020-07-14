@@ -179,22 +179,20 @@ alert([[${songs}]])
 
         function createDemo(name){
             var container = $('#pagination-' + name);
-            var sources = function(){
-                var result = [];
-
-                for(var i = 1; i < 196; i++){
-                    var obj={
-                        name:"zhangsan",
-                        age:12
-                    }
-                    result.push(obj);
-                }
-
-                return result;
-            }();
+            // var sources = function(){
+            //     var result = [];
+            //
+            //     for(var i = 0; i < [[${size}]]; i++){
+            //         [[${songs.get(0)}]];
+            //        var tem=[[${songs.get(i)}]];
+            //        result.push(tem)
+            //     }
+            //
+            //     return result;
+            // }();
 
             var options = {
-                dataSource: sources,
+                dataSource: [[${songs}]],
                 className: 'paginationjs-theme-blue',
                 callback: function(response, pagination){
                     window.console && console.log(response, pagination);
@@ -202,7 +200,7 @@ alert([[${songs}]])
                     var dataHtml = '<ul>';
 
                     $.each(response, function(index, item){
-                        dataHtml += '<li>'+ item.name +item.age+'</li>';
+                        dataHtml += '<li>'+ item.name+'</li>';
                     });
 
                     dataHtml += '</ul>';
