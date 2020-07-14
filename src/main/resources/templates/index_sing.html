@@ -145,8 +145,9 @@
 <p></p>
 <script src="/static/js/jquery-2.1.1.min.js"></script>
 <script src="/static/js/pagination.js"></script>
-<script type="text/javascript">
-alert([[${songs}]])
+<!--这个标签很重要th:inline，如果没有的话，不能得到list中的值-->
+<script type="text/javascript" th:inline="javascript">
+    console.log("test"+[[${size}]]+"===="+[[${songs.get(0)}]])
     $(function(){
         $('a').on('click', function(){ return false; });
 
