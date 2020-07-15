@@ -1,20 +1,32 @@
 package com.wyq.music.controller;
 
 import com.wyq.music.entity.Music;
+import com.wyq.music.service.MusicService;
+import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class MusicController {
+    //注入服务层
+    @Autowired
+    MusicService musicService;
+
     //处理登录请求
     @RequestMapping("/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response,
@@ -41,16 +53,29 @@ public class MusicController {
         modelAndView.setViewName("index_sing");
         return modelAndView;
     }
+
     //返回json数据
     @RequestMapping("/data")
     @ResponseBody
     public List<Music> getdata(){
-        List<Music> list=new ArrayList<Music>();
-        for (int i = 0; i <100 ; i++) {
-            Music music=new Music(i,"a"+i,"a","a",10,"");
-            list.add(music);
-        }
+        List<Music> list = musicService.getAll();
         return list;
+    }
+
+    //上传请求
+    @RequestMapping(value = "/upload",method= RequestMethod.POST)
+    public ModelAndView upload(@RequestParam("") MultipartFile file, HttpServletRequest request,
+                               HttpServletResponse response) throws IOException {
+        String realPath="C:\\Users\\issuser\\IdeaProjects\\music\\src\\main\\resources\\static\\music";
+        FileUtils.copyInputStreamToFile(file.getInputStream(), new File(realPath, "hello.mp3"));
+        return null;
+    }
+    //跳到上传页面
+    @RequestMapping("/uploadPage")
+    public ModelAndView uploadPage(){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("index_upload");
+        return modelAndView;
     }
 }
 

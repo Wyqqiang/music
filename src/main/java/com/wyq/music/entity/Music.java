@@ -1,37 +1,56 @@
 package com.wyq.music.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
-
+@Entity
 public class Music implements Serializable {
 
     /**
      * 音乐编号
      */
+    @Id
+    @GeneratedValue
     private int id;
     /**
      * 音乐名称
      */
+    @Column
     private String name;
     /**
      * 歌手名称
      */
+    @Column
     private String singer;
     /**
      * 专辑名称
      */
+    @Column
     private String album;
     /**
      * 播放时长
      */
+    @Column
     private int duration;
     /**
      * 音乐文件存放路径
      */
+    @Column
     private String path;
 
     public Music() {
 
+    }
+
+    public Music(int id, String name, String singer, String album, String path) {
+        this.id = id;
+        this.name = name;
+        this.singer = singer;
+        this.album = album;
+        this.path = path;
     }
 
     public Music(String name, String singer, String album, int duration, String path) {
