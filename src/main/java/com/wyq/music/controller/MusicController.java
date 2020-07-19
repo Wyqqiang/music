@@ -5,6 +5,7 @@ import com.wyq.music.service.MusicService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,16 +67,12 @@ public class MusicController {
     @RequestMapping(value = "/upload",method= RequestMethod.POST)
     public ModelAndView upload(@RequestParam("") MultipartFile file, HttpServletRequest request,
                                HttpServletResponse response) throws IOException {
-        String realPath="C:\\Users\\issuser\\IdeaProjects\\music\\src\\main\\resources\\static\\music";
-        FileUtils.copyInputStreamToFile(file.getInputStream(), new File(realPath, "hello.mp3"));
+        String basepath = System.getProperty("user.dir");
+        String base=basepath+"\\music\\src\\main\\resources\\static\\music";
+        System.out.println("path==="+base);
+        file.transferTo(new File( base,file.getOriginalFilename()));
+
         return null;
-    }
-    //跳到上传页面
-    @RequestMapping("/uploadPage")
-    public ModelAndView uploadPage(){
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("index_upload");
-        return modelAndView;
     }
 }
 

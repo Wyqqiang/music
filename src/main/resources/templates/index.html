@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jQuery和CSS3响应式TAB选项卡样式幻灯片特效|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
     <link rel="stylesheet" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/htmleaf-demo.css">
+    <link rel="stylesheet" type="/static/text/css" href="css/htmleaf-demo.css">
     <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/default.css">
+    <link href="/static/css/pagination.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <!--<header class="htmleaf-header">
@@ -20,7 +24,6 @@
 </header>-->
 <section class="htmleaf-container">
     <div class="landing-slider">
-
         <!--tabSlider-->
         <div class="tabSlider">
             <!--
@@ -40,33 +43,67 @@
             <div class="ts-items">
                 <!-- Single item -->
                 <div class="ts-item is-active">
-                    <div class="ts-banner"> <img src="/static/img/621.jpg" alt="alt goes here" /> </div>
+                    <div class="ts-banner"><img src="/static/img/621.jpg" alt="alt goes here"/></div>
                     <div class="ts-container set-layout thumb-cont">
-                        <div class="ts-thumbnail"> <img src="/static/img/iphone.png" alt="alt" /> </div>
+                        <div class="ts-thumbnail"><img src="/static/img/iphone.png" alt="alt"/></div>
                         <div class="ts-content">
                             <!--<div class="ts-title"> 进来听歌呗 </div>-->
-                            <a href="/sing"  > <span>不来听首歌吗？</span> <small>music</small> <i class="fa fa-arrow-circle-right"></i> </a> </div>
+                            <a id="sing"> <span>不来听首歌吗？</span> <small>music</small>
+                                <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                        <article class="htmleaf-container article" style="display: none">
+                            <div id="wrapper">
+                                <section>
+                                    <div class="data-container"></div>
+                                    <div id="pagination-demo1"></div>
+                                </section>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="container" style="display: none">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <audio style="width: 80%" controls="controls" src="/static/music/Amy.mp3"
+                                       id="music"></audio>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Single item -->
+                <!-- Singleitem -->
                 <div class="ts-item">
-                    <div class="ts-banner"> <img src="static/img/622.jpg" alt="alt goes here" /></div>
+                    <div class="ts-banner"><img src="static/img/622.jpg" alt="alt goes here"/></div>
                     <div class="ts-container set-layout thumb-cont">
-                        <div class="ts-thumbnail"> <img src="static/img/s3.png" alt="alt" /> </div>
+                        <div class="ts-thumbnail"><img src="static/img/s3.png" alt="alt"/></div>
                         <div class="ts-content">
                             <!-- <div class="ts-title"> 上传歌曲 </div>-->
-                            <a href="/uploadPage" class="ts-btn pull-right set-icon to-right"> <span>我也传首歌</span> <small></small> <i class="fa fa-arrow-circle-right"></i> </a> </div>
+                            <a id="upload" class="ts-btn pull-right set-icon to-right">
+                                <span>我也传首歌</span> <small></small> <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+
+                        <article class="htmleaf-container" style="display: none">
+                            <section>
+                                <form role="form" action="/upload" enctype="multipart/form-data" method="post">
+                                    <div class="form-group">
+                                        <label>文件输入</label>
+                                        <input type="file" name="file">
+                                        <p class="help-block">这里是块级帮助文本的实例。</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">提交</button>
+                                </form>
+                            </section>
+                        </article>
                     </div>
                 </div>
-
                 <!-- Single item -->
                 <div class="ts-item">
-                    <div class="ts-banner"> <img src="static/img/623.jpg" alt="alt goes here" /> </div>
+                    <div class="ts-banner"><img src="static/img/623.jpg" alt="alt goes here"/></div>
                     <div class="ts-container set-layout thumb-cont">
-                        <div class="ts-thumbnail"> <img src="static/img/lumia.png" alt="alt" /> </div>
+                        <div class="ts-thumbnail"><img src="static/img/lumia.png" alt="alt"/></div>
                         <div class="ts-content">
-                            <a href="" class="ts-btn pull-right set-icon to-right" style="background: #3498DB;margin-bottom: 10px;">
+                            <a href="" class="ts-btn pull-right set-icon to-right"
+                               style="background: #3498DB;margin-bottom: 10px;">
                                 <span>偷看下别人的留言，咳咳</span>
                                 <small>Praesent at enim vel nibh</small>
                                 <i class="fa fa-arrow-circle-right"></i>
@@ -80,7 +117,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 </section>
 <!--<footer class="related">
@@ -94,36 +130,107 @@
       <h3>创意jQuery和CSS3滑动覆盖响应式幻灯片特效</h3>
     </a>
 </footer>-->
-
 <script src="/static/js/jquery-2.1.1.min.js"></script>
+<script src="/static/js/pagination.js"></script>
 <script type="text/javascript">
-    $(function(){
+    $(function () {
+        //点击听歌
+        $("#sing").click(function () {
+            $('.ts-item').eq(0).find(".ts-content").css("display", "none");
+            $('.ts-item').eq(0).find("article").css("display", "block");
+            $('.ts-item').eq(0).find(".container").css("display", "block")
+        })
+        //点击传歌的跳转
+        $("#upload").click(function () {
+            $('.ts-item').eq(1).find(".ts-content").css("display", "none");
+            $('.ts-item').eq(1).find("article").css("display", "block");
+            //alert(1)
+        })
         //$('a').on('click', function(){ return false; });
-
         // set item banner
         $('.ts-item').first().show();
         $('.ts-item').each(function () {
             var $this = $(this),
-                _imgSrc  = $this.find('.ts-banner img').attr('src');
-
-            if(_imgSrc)
+                _imgSrc = $this.find('.ts-banner img').attr('src');
+            if (_imgSrc)
                 $this.css('background-image', 'url(' + _imgSrc + ')');
         });
-
-        $('.ts-control li').on('click', function(){
-            var  $this = $(this),
+        $('.ts-control li').on('click', function () {
+            var $this = $(this),
                 _index = $this.index();
-
             $("li.is-active").removeClass("is-active");
             $(this).addClass("is-active");
-
             $('.ts-item.is-active').removeClass('is-active').fadeOut();
             $('.ts-item').eq(_index).addClass('is-active').fadeIn();
+            $('.ts-item').eq(0).find(".ts-content").css("display", "block");
+            $('.ts-item').eq(0).find("article").css("display", "none");
+            $('.ts-item').eq(0).find(".container").css("display", "none")
 
+            $('.ts-item').eq(1).find(".ts-content").css("display", "block");
+            $('.ts-item').eq(1).find("article").css("display", "none");
             return false;
         });
-
         var ww = $(window).width();
+    });
+    //加载列表数据
+    $(function () {
+        function createDemo(name) {
+            var container = $('#pagination-' + name);
+            var sources;
+            $.ajax({
+                type: "post",
+                url: "/data",
+                async: false, // 异步请求
+                cache: false, // 设置为 false 将不缓存此页面
+                dataType: 'json', // 返回对象
+                success: function (data) {
+                    sources = data;
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
+            var options = {
+                dataSource: sources,
+                className: 'paginationjs-theme-blue',
+                callback: function (response, pagination) {
+                    window.console && console.log(response, pagination);
+                    var dataHtml = '<table class="table table-hover"><tr style="background:#3498db"><td>歌曲名称</td><td>歌手</td><td>操作</td></tr>';
+                    $.each(response, function (index, item) {
+                        dataHtml += '<tr><td>' + item.name + '</td><td>' + item.singer +'</td><td><button class="play" id='+item.path +'>播放</button></td></tr>';
+                    });
+                    dataHtml += '</table>';
+                    container.prev().html(dataHtml);
+                }
+            };
+            //$.pagination(container, options);
+            // container.addHook('beforeInit', function(){
+            //     window.console && console.log('beforeInit...');
+            // });
+            container.pagination(options);
+            // container.addHook('beforePageOnClick', function(){
+            //     window.console && console.log('beforePageOnClick...');
+            //     //return false
+            // });
+            return container;
+        }
+        createDemo('demo1');
+
+        //歌曲的切换
+        $(".play").click(function(){
+            //获取到你所定义的音频标签
+            var audios = document.getElementById("music");
+            //获取当前歌曲的路径
+            var path=$(this).attr("id");
+            //停止播放
+            audios.pause();
+            //这种方式是js的，不是jq的方式设置src
+            audios.src=path;
+            //重新加载
+            audios.load();
+            //播放
+            audios.play();
+        })
     });
 </script>
 </body>

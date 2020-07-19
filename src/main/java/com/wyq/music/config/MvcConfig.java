@@ -20,5 +20,9 @@ public class MvcConfig extends WebMvcConfigurationSupport {
         //registry.addResourceHandler("/css/**","/js/**").addResourceLocations("classpath:/static/css/","classpath:/static/js/");
         registry.addResourceHandler("/static/css/**","/static/js/**","static/img/**","static/music/**").addResourceLocations("classpath:/static/css/","classpath:/static/js/","classpath:/static/img/","classpath:/static/music/");
         //下面的这种写法，页面引入的时候前缀需要加上static，addResourceHandler只是一个逻辑的地址，不是实际地址，addResourceLocations是真正的地址
+
+        //添加上传图片的路径
+        //registry.addResourceHandler("/static/file/**").addResourceLocations("file:///C:/file");
+
     }
 }
