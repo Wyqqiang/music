@@ -119,6 +119,10 @@
             </div>
         </div>
 </section>
+
+<input id="status" th:value="${status}" style="display: none">
+<!--/*@thymesVar id="status" type=""*/-->
+
 <!--<footer class="related">
     <h3>如果你喜欢这个插件，那么你可能也喜欢:</h3>
     <a href="http://www.htmleaf.com/jQuery/Slideshow-Scroller/jquery-fractionslider.html">
@@ -130,10 +134,18 @@
       <h3>创意jQuery和CSS3滑动覆盖响应式幻灯片特效</h3>
     </a>
 </footer>-->
+<!--themeleaf中不能使用request中的值-->
 <script src="/static/js/jquery-2.1.1.min.js"></script>
 <script src="/static/js/pagination.js"></script>
 <script type="text/javascript">
     $(function () {
+        var status=$("#status").val();
+        alert(status);
+        if(status =="success"){
+
+        }else{
+            alert(2)
+        }
         //点击听歌
         $("#sing").click(function () {
             $('.ts-item').eq(0).find(".ts-content").css("display", "none");

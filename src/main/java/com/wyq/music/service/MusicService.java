@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MusicService {
     List<Music> getAll();
+
+    void saveOne(Music music);
 }

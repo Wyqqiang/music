@@ -16,4 +16,11 @@ public class MusicServiceImple implements  MusicService {
     public List<Music> getAll() {
         return musicDao.findAll();
     }
+
+    @Override
+    public void saveOne(Music music) {
+        musicDao.save(music);
+    }
+
+
 }

@@ -2,6 +2,7 @@ package com.wyq.music.controller;
 
 import com.wyq.music.entity.Music;
 import com.wyq.music.service.MusicService;
+import com.wyq.music.util.MusicUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,11 +69,23 @@ public class MusicController {
     public ModelAndView upload(@RequestParam("") MultipartFile file, HttpServletRequest request,
                                HttpServletResponse response) throws IOException {
         String basepath = System.getProperty("user.dir");
-        String base=basepath+"\\music\\src\\main\\resources\\static\\music";
+        String base=basepath+"\\src\\main\\resources\\static\\music";
         System.out.println("path==="+base);
         file.transferTo(new File( base,file.getOriginalFilename()));
-
-        return null;
+        //上传成功的话，把信息存入数据库中
+        try {
+            String originalFilename = file.getOriginalFilename();
+            Music musicInfo = MusicUtil.getMusicInfo(base+"\\"+originalFilename);
+            //String name, String singer, String album, int duration, String path
+            Music music=new Music(musicInfo.getName(),musicInfo.getSinger(),musicInfo.getAlbum(),musicInfo.getDuration(),"/static/music/"+musicInfo.getPath());
+            musicService.saveOne(music);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("status","success");
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 }
 
