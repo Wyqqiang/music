@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -12,7 +12,12 @@
     <link rel="stylesheet" type="text/css" href="/static/css/normalize.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/default.css">
     <link href="/static/css/pagination.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css">f
+    <link href="/static/css/reset02.css" rel="stylesheet" type="text/css">f
+    <link href="/static/css/style02.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/normalize02.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/component.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <!--<header class="htmleaf-header">
@@ -72,9 +77,9 @@
                 </div>
                 <!-- Singleitem -->
                 <div class="ts-item">
-                    <div class="ts-banner"><img src="static/img/622.jpg" alt="alt goes here"/></div>
+                    <div class="ts-banner"><img src="/static/img/622.jpg" alt="alt goes here"/></div>
                     <div class="ts-container set-layout thumb-cont">
-                        <div class="ts-thumbnail"><img src="static/img/s3.png" alt="alt"/></div>
+                        <div class="ts-thumbnail"><img src="/static/img/s3.png" alt="alt"/></div>
                         <div class="ts-content">
                             <!-- <div class="ts-title"> 上传歌曲 </div>-->
                             <a id="upload" class="ts-btn pull-right set-icon to-right">
@@ -98,53 +103,286 @@
                 </div>
                 <!-- Single item -->
                 <div class="ts-item">
-                    <div class="ts-banner"><img src="static/img/623.jpg" alt="alt goes here"/></div>
+                    <div class="ts-banner"><img src="/static/img/623.jpg" alt="alt goes here"/></div>
                     <div class="ts-container set-layout thumb-cont">
-                        <div class="ts-thumbnail"><img src="static/img/lumia.png" alt="alt"/></div>
+                        <div class="ts-thumbnail"><img src="/static/img/lumia.png" alt="alt"/></div>
                         <div class="ts-content">
-                            <a href="" class="ts-btn pull-right set-icon to-right"
+                            <a id="other_message"  class="ts-btn pull-right set-icon to-right"
                                style="background: #3498DB;margin-bottom: 10px;">
                                 <span>偷看下别人的留言，咳咳</span>
                                 <small>Praesent at enim vel nibh</small>
                                 <i class="fa fa-arrow-circle-right"></i>
                             </a>
-                            <a href="" class="ts-btn pull-right set-icon to-right">
+                            <a id="my_message"  class="ts-btn pull-right set-icon to-right">
                                 <span>我也留个言</span>
                                 <small>Praesent at enim vel nibh</small>
                                 <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
+                                <div id="message" style="display: none">
+                                <div class="cd-testimonials-wrapper cd-container">
+                                    <ul class="cd-testimonials">
+                                        <li>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                            <div class="cd-author">
+                                                <img src="/static/img/avatar-1.jpg" alt="Author image">
+                                                <ul class="cd-author-info">
+                                                    <li>MyName</li>
+                                                    <li>CEO, AmberCreative</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus ea, perferendis error repudiandae numquam dolor fuga temporibus. Unde omnis, consequuntur.</p>
+                                            <div class="cd-author">
+                                                <img src="/static/img/avatar-2.jpg" alt="Author image">
+                                                <ul class="cd-author-info">
+                                                    <li>MyName</li>
+                                                    <li>Designer, CodyHouse</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam totam nulla est, illo molestiae maxime officiis, quae ad, ipsum vitae deserunt molestias eius alias.</p>
+                                            <div class="cd-author">
+                                                <img src="/static/img/avatar-3.jpg" alt="Author image">
+                                                <ul class="cd-author-info">
+                                                    <li>MyName</li>
+                                                    <li>CEO, CompanyName</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                    </ul> <!-- cd-testimonials -->
+
+                                    <a href="#0" class="cd-see-all">See all</a>
+                                </div> <!-- cd-testimonials-wrapper -->
+
+                                <div class="cd-testimonials-all">
+                                    <div class="cd-testimonials-all-wrapper">
+                                        <ul>
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit totam saepe iste maiores neque animi molestias nihil illum nisi temporibus.</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-1.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nostrum nisi, doloremque error hic nam nemo doloribus porro impedit perferendis. Tempora, distinctio hic suscipit. At ullam eaque atque recusandae modi fugiat voluptatem laborum laboriosam rerum, consequatur reprehenderit omnis, enim pariatur nam, quidem, quas vel reiciendis aspernatur consequuntur. Commodi quasi enim, nisi alias fugit architecto, doloremque, eligendi quam autem exercitationem consectetur.</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-2.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem quibusdam eveniet, molestiae laborum voluptatibus minima hic quasi accusamus ut facere, eius expedita, voluptatem? Repellat incidunt veniam quaerat, qui laboriosam dicta. Quidem ducimus laudantium dolorum enim qui at ipsum, a error.</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-3.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero voluptates officiis tempore quae officia! Beatae quia deleniti cum corporis eos perferendis libero reiciendis nemo iusto accusamus, debitis tempora voluptas praesentium repudiandae laboriosam excepturi laborum, nisi optio repellat explicabo, incidunt ex numquam. Ullam perferendis officiis harum doloribus quae corrupti minima quia, aliquam nostrum expedita pariatur maxime repellat, voluptas sunt unde, inventore.</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-4.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit totam saepe iste maiores neque animi molestias nihil illum nisi temporibus.</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-5.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis quia quas, quis illo adipisci voluptate ex harum iste commodi nulla dolor. Eius ratione quod ab!</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-6.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, dignissimos iure rem fugiat consequuntur officiis.</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-1.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At temporibus tempora necessitatibus reiciendis provident deserunt maxime sit id. Dicta aut voluptatibus placeat quibusdam vel, dolore.</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-2.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis iusto sapiente, excepturi velit, beatae possimus est tenetur cumque fugit tempore dolore fugiat! Recusandae, vel suscipit? Perspiciatis non similique sint suscipit officia illo, accusamus dolorum, voluptate vitae quia ea amet optio magni voluptatem nemo, natus nihil.</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-3.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor quasi officiis pariatur, fugit minus omnis animi ut assumenda quod commodi, ad a alias maxime unde suscipit magnam, voluptas laboriosam ipsam quibusdam quidem, dolorem deleniti id.</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-4.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At temporibus tempora necessitatibus reiciendis provident deserunt maxime sit id. Dicta aut voluptatibus placeat quibusdam vel, dolore.</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-5.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+
+                                            <li class="cd-testimonials-item">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque tempore ipsam, eos suscipit nostrum molestias reprehenderit, rerum amet cum similique a, ipsum soluta delectus explicabo nihil repellat incidunt! Minima magni possimus mollitia deserunt facere, tempore earum modi, ea ipsa dicta temporibus suscipit quidem ut quibusdam vero voluptatibus nostrum excepturi explicabo nulla harum, molestiae alias. Ab, quidem rem fugit delectus quod.</p>
+
+                                                <div class="cd-author">
+                                                    <img src="/static/img/avatar-6.jpg" alt="Author image">
+                                                    <ul class="cd-author-info">
+                                                        <li>MyName</li>
+                                                        <li>CEO, CompanyName</li>
+                                                    </ul>
+                                                </div> <!-- cd-author -->
+                                            </li>
+                                        </ul>
+                                    </div>	<!-- cd-testimonials-all-wrapper -->
+
+                                    <a href="#0" class="close-btn">Close</a>
+                                </div> <!-- cd-testimonials-all -->
+                                </div>
+                        <article class="container" style="display: none">
+                            <div>
+                                <section class="content bgcolor-4">
+                                    <h2></h2>
+                                    <span class="input input--akira">
+                                        <input class="input__field input__field--akira" type="text" id="input-23"/>
+                                        <label class="input__label input__label--akira" for="input-23">
+                                            <span class="input__label-content input__label-content--akira">Last Name</span>
+                                        </label>
+                                    </span>
+                                </section>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
         </div>
 </section>
-
 <input id="status" th:value="${status}" style="display: none">
-<!--/*@thymesVar id="status" type=""*/-->
-
-<!--<footer class="related">
-    <h3>如果你喜欢这个插件，那么你可能也喜欢:</h3>
-    <a href="http://www.htmleaf.com/jQuery/Slideshow-Scroller/jquery-fractionslider.html">
-      <img src="related/1.jpg" width="300" alt="fractionslider-带多重动画效果的jQuery幻灯片插件"/>
-      <h3>fractionslider-带多重动画效果的jQuery幻灯片插件</h3>
-    </a>
-    <a href="http://www.htmleaf.com/jQuery/Slideshow-Scroller/pointy-slider.html">
-      <img src="related/2.jpg" width="300" alt="创意jQuery和CSS3滑动覆盖响应式幻灯片特效"/>
-      <h3>创意jQuery和CSS3滑动覆盖响应式幻灯片特效</h3>
-    </a>
-</footer>-->
 <!--themeleaf中不能使用request中的值-->
 <script src="/static/js/jquery-2.1.1.min.js"></script>
 <script src="/static/js/pagination.js"></script>
+<script src="/static/js/jquery.flexslider-min.js"></script>
+<script src="/static/js/main.js"></script>
+<script src="/static/js/masonry.pkgd.min.js"></script>
+<script src="/static/js/modernizr.js"></script>
+<script src="/static/js/classie.js"></script>
+<!--输入的特效-->
+<script>
+    //
+    (function() {
+        if (!String.prototype.trim) {
+            (function() {
+                // Make sure we trim BOM and NBSP
+                var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                String.prototype.trim = function() {
+                    return this.replace(rtrim, '');
+                };
+            })();
+        }
+
+        [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+            // in case the input is already filled..
+            if( inputEl.value.trim() !== '' ) {
+                classie.add( inputEl.parentNode, 'input--filled' );
+            }
+
+            // events:
+            inputEl.addEventListener( 'focus', onInputFocus );
+            inputEl.addEventListener( 'blur', onInputBlur );
+        } );
+
+        function onInputFocus( ev ) {
+            classie.add( ev.target.parentNode, 'input--filled' );
+        }
+
+        function onInputBlur( ev ) {
+            if( ev.target.value.trim() === '' ) {
+                classie.remove( ev.target.parentNode, 'input--filled' );
+            }
+        }
+    })();
+</script>
+<!--输入特效结束-->
 <script type="text/javascript">
     $(function () {
         var status=$("#status").val();
-        alert(status);
         if(status =="success"){
-
-        }else{
-            alert(2)
+            $('.ts-item').eq(0).find(".ts-content").css("display", "none");
+            $('.ts-item').eq(0).find("article").css("display", "block");
+            $('.ts-item').eq(0).find(".container").css("display", "block")
         }
         //点击听歌
         $("#sing").click(function () {
@@ -158,6 +396,18 @@
             $('.ts-item').eq(1).find("article").css("display", "block");
             //alert(1)
         })
+        //点击查看别人的留言
+        $("#other_message").click(function () {
+            $('.ts-item').eq(2).find(".ts-content").css("display", "none");
+            $('.ts-item').eq(2).find("#message").css("display", "block");
+            $('.ts-item').eq(2).find(".container").css("display", "none");
+        })
+        //自己写留言
+        $("#my_message").click(function () {
+            $('.ts-item').eq(2).find(".ts-content").css("display", "none");
+            $('.ts-item').eq(2).find(".container").css("display", "block");
+        })
+        
         //$('a').on('click', function(){ return false; });
         // set item banner
         $('.ts-item').first().show();
@@ -180,6 +430,11 @@
 
             $('.ts-item').eq(1).find(".ts-content").css("display", "block");
             $('.ts-item').eq(1).find("article").css("display", "none");
+
+            $('.ts-item').eq(2).find(".ts-content").css("display", "block");
+            $('.ts-item').eq(2).find("#message").css("display", "none");
+
+            $('.ts-item').eq(2).find(".container").css("display", "none");
             return false;
         });
         var ww = $(window).width();
@@ -215,19 +470,10 @@
                     container.prev().html(dataHtml);
                 }
             };
-            //$.pagination(container, options);
-            // container.addHook('beforeInit', function(){
-            //     window.console && console.log('beforeInit...');
-            // });
             container.pagination(options);
-            // container.addHook('beforePageOnClick', function(){
-            //     window.console && console.log('beforePageOnClick...');
-            //     //return false
-            // });
             return container;
         }
         createDemo('demo1');
-
         //歌曲的切换
         $(".play").click(function(){
             //获取到你所定义的音频标签
