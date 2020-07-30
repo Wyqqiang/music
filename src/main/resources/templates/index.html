@@ -61,7 +61,7 @@
                             <div id="wrapper">
                                 <section>
                                     <div class="data-container"></div>
-                                    <div id="pagination-demo1"></div>
+                                    <ul id="mypage"></ul>
                                 </section>
                             </div>
                         </article>
@@ -333,12 +333,16 @@
 <input id="status" th:value="${status}" style="display: none">
 <!--themeleaf中不能使用request中的值-->
 <script src="/static/js/jquery-2.1.1.min.js"></script>
-<script src="/static/js/pagination.js"></script>
+<!--<script src="/static/js/pagination.js"></script>-->
 <script src="/static/js/jquery.flexslider-min.js"></script>
 <script src="/static/js/main.js"></script>
 <script src="/static/js/masonry.pkgd.min.js"></script>
 <script src="/static/js/modernizr.js"></script>
 <script src="/static/js/classie.js"></script>
+<!--分页插件-->
+<script src="/static/js/page.js"></script>
+<!--bootstrap引入-->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <!--输入的特效-->
 <script>
     //
@@ -441,41 +445,74 @@
     });
     //加载列表数据
     $(function () {
-        function createDemo(name) {
-            var container = $('#pagination-' + name);
-            var sources;
-            $.ajax({
-                type: "post",
-                url: "/data",
-                async: false, // 异步请求
-                cache: false, // 设置为 false 将不缓存此页面
-                dataType: 'json', // 返回对象
-                success: function (data) {
-                    sources = data;
-                },
-                error: function (data) {
-                    console.log(data);
+        //分页处理
+        pageStart();//开始分页
+
+        function pageStart() {//分页函数
+            $.ajax({ //去后台查询第一页数据
+                type : "get",
+                url : "/find_music",
+                dataType : "json",
+                data : {page : '1',size:'1'}, //参数：当前页为1
+                success : function(data) {
+                    //alert(data)
+                    appendHtml(data.list);//处理第一页的数据
+                    var options = {//根据后台返回的分页相关信息，设置插件参数
+                        bootstrapMajorVersion : 3, //如果是bootstrap3版本需要加此标识，并且设置包含分页内容的DOM元素为UL,如果是bootstrap2版本，则DOM包含元素是DIV
+                        currentPage : data.page, //当前页数
+                        totalPages : data.totalPage, //总页数
+                        numberOfPages : data.pageSize,//每页记录数
+                        itemTexts : function(type, page, current) {//设置分页按钮显示字体样式
+                            switch (type) {
+                                case "first":
+                                    return "首页";
+                                case "prev":
+                                    return "上一页";
+                                case "next":
+                                    return "下一页";
+                                case "last":
+                                    return "末页";
+                                case "page":
+                                    return page;
+                            }
+                        },
+                        onPageClicked : function(event, originalEvent, type, page) {//分页按钮点击事件
+                            $.ajax({//根据page去后台加载数据
+                                url : "/find_music",
+                                type : "get",
+                                dataType : "json",
+                                data : {"page" : page},
+                                success : function(data) {
+                                    appendHtml(data.list);//处理数据
+                                }
+                            });
+                        }
+                    };
+                    $('#mypage').bootstrapPaginator(options);//设置分页
                 }
-            })
-            var options = {
-                dataSource: sources,
-                className: 'paginationjs-theme-blue',
-                callback: function (response, pagination) {
-                    window.console && console.log(response, pagination);
-                    var dataHtml = '<table class="table table-hover"><tr style="background:#3498db"><td>歌曲名称</td><td>歌手</td><td>操作</td></tr>';
-                    $.each(response, function (index, item) {
-                        dataHtml += '<tr><td>' + item.name + '</td><td>' + item.singer +'</td><td><button class="play" id='+item.path +'>播放</button></td></tr>';
-                    });
-                    dataHtml += '</table>';
-                    container.prev().html(dataHtml);
-                }
-            };
-            container.pagination(options);
-            return container;
+            });
         }
-        createDemo('demo1');
+
+        //添加数据
+        function appendHtml(list) {//此函数用于处理后台返回的数据，根据自己需求来实现页面拼接
+            var tableShow = '';
+            for (var i = 0; i < list.length; i++) {
+                // tableShow += '<a href="news/'+list[i].id+'.do">';
+                tableShow += '<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" style="border-top: 0px">';
+                tableShow += '<div class="am-u-sm-4 am-list-thumb">';
+                // tableShow += '<img src="'+list[i].newsUrl+'"/>';
+                tableShow += '</div><div class=" am-u-sm-7 am-list-main">';
+                tableShow += '<h3 class="am-list-item-hd">' + list[i].name + '</h3>';
+                tableShow += '</div></li><div class="newsico am-fr">';
+                tableShow += '<i class="am-icon-clock-o  am-hide-sm-only">' + list[i].singer + '</i></div></a>';
+                tableShow += '<li class="play" id=' + list[i].path + '>'+ list[i].name+" &nbsp;  &nbsp; &nbsp; "+list[i].id +list[i].path+'</li>';
+            }
+            $('.data-container').html(tableShow)
+        }
+
         //歌曲的切换
         $(".play").click(function(){
+            alert(1)
             //获取到你所定义的音频标签
             var audios = document.getElementById("music");
             //获取当前歌曲的路径

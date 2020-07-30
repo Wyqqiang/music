@@ -5,6 +5,7 @@ import com.wyq.music.service.MusicService;
 import com.wyq.music.util.MusicUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,9 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MusicController {
@@ -86,6 +89,20 @@ public class MusicController {
         modelAndView.addObject("status","success");
         modelAndView.setViewName("index");
         return modelAndView;
+    }
+
+    //分页查询
+    @ResponseBody
+    @RequestMapping("/find_music")
+    public Map<String,Object> save(@RequestParam("page") String page, @RequestParam("size") String size){
+        Map<String,Object> map= new HashMap<String,Object>();
+        Page<Music> pages = musicService.pages(Integer.parseInt(page), Integer.parseInt(size));
+        List<Music> content = musicService.pages(Integer.parseInt(page), Integer.parseInt(size)).getContent();
+        map.put("list",content);
+        map.put("totalPage",pages.getTotalPages());
+        map.put("page",Integer.parseInt(page));
+        map.put("pageSize",Integer.parseInt(size));
+        return map;
     }
 }
 
