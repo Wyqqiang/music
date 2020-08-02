@@ -40,17 +40,23 @@ public class Music implements Serializable {
      */
     @Column
     private String path;
+    /**
+     * 音乐文件存放路径
+     */
+    @Column
+    private String imgPath;
 
     public Music() {
 
     }
 
-    public Music(int id, String name, String singer, String album, String path) {
+    public Music(int id, String name, String singer, String album, String path,String imgpath) {
         this.id = id;
         this.name = name;
         this.singer = singer;
         this.album = album;
         this.path = path;
+        this.imgPath=imgpath;
     }
 
     public Music(String name, String singer, String album, int duration, String path) {
@@ -60,8 +66,16 @@ public class Music implements Serializable {
         this.duration = duration;
         this.path = path;
     }
+    public Music( String name, String singer, String album, int duration, String path,String imgpath) {
 
-    public Music(int id, String name, String singer, String album, int duration, String path) {
+        this.name = name;
+        this.singer = singer;
+        this.album = album;
+        this.duration = duration;
+        this.path = path;
+        this.imgPath=imgpath;
+    }
+    public Music(int id, String name, String singer, String album, int duration, String path,String imgpath) {
 
         this.id = id;
         this.name = name;
@@ -69,6 +83,7 @@ public class Music implements Serializable {
         this.album = album;
         this.duration = duration;
         this.path = path;
+        this.imgPath=imgpath;
     }
 
     public int getId() {
@@ -119,7 +134,13 @@ public class Music implements Serializable {
         this.path = path;
     }
 
+    public String getImgPath() {
+        return imgPath;
+    }
 
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
 
     @Override
     public boolean equals(Object o) {

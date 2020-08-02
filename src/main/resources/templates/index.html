@@ -12,21 +12,91 @@
     <link rel="stylesheet" type="text/css" href="/static/css/normalize.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/default.css">
     <link href="/static/css/pagination.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css">f
-    <link href="/static/css/reset02.css" rel="stylesheet" type="text/css">f
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/reset02.css" rel="stylesheet" type="text/css">
     <link href="/static/css/style02.css" rel="stylesheet" type="text/css">
     <link href="/static/css/normalize02.css" rel="stylesheet" type="text/css">
     <link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="/static/css/component.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/htmleaf-demo02.css" rel="stylesheet" type="text/css">
 </head>
+<style type="text/css">
+    a:hover, a:focus {
+        text-decoration: none;
+        outline: none;
+    }
+
+    #accordion {
+        padding-left: 76px;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+    }
+
+    #accordion:before {
+        content: "";
+        width: 1px;
+        height: 90%;
+        background: #9d325b;
+        position: absolute;
+        top: 0;
+        left: 22px;
+        z-index: -1;
+    }
+
+    #accordion .panel {
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    #accordion .panel-heading {
+        padding: 0;
+        border-radius: 0;
+        border: none;
+    }
+
+    #accordion .panel-title a {
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+        color: #31162e;
+        padding: 10px 30px 15px 0;
+        background: #fff;
+        position: relative;
+        transition: all 0.5s ease 0s;
+    }
+
+    #accordion .panel-title a:before {
+        content: "\f05b";
+        font-family: fontawesome;
+        font-size: 20px;
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background: #9d325b;
+        border: 1px solid #9d325b;
+        position: absolute;
+        top: 0;
+        left: -74px;
+    }
+
+    #accordion .panel-title a.collapsed:before {
+        color: #9c335b;
+        background: #fff;
+    }
+
+    #accordion .panel-body {
+        font-size: 14px;
+        color: #487677;
+        line-height: 25px;
+        padding: 5px 15px 15px 0;
+        border: none;
+    }
+</style>
 <body>
-<!--<header class="htmleaf-header">
-    <h1>jQuery和CSS3响应式TAB选项卡样式幻灯片特效 <span>CSS3 Animated Responsive Tab Slider Plugin For jQuery</span></h1>
-    <div class="htmleaf-links">
-        <a class="htmleaf-icon icon-htmleaf-home-outline" href="http://www.htmleaf.com/" title="jQuery之家" target="_blank"><span> jQuery之家</span></a>
-        <a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/jQuery/Slideshow-Scroller/201601313089.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
-    </div>
-</header>-->
 <section class="htmleaf-container">
     <div class="landing-slider">
         <!--tabSlider-->
@@ -60,7 +130,7 @@
                         <article class="htmleaf-container article" style="display: none">
                             <div id="wrapper">
                                 <section>
-                                    <div class="data-container"></div>
+                                    <div class="data-container container"></div>
                                     <ul id="mypage"></ul>
                                 </section>
                             </div>
@@ -107,224 +177,126 @@
                     <div class="ts-container set-layout thumb-cont">
                         <div class="ts-thumbnail"><img src="/static/img/lumia.png" alt="alt"/></div>
                         <div class="ts-content">
-                            <a id="other_message"  class="ts-btn pull-right set-icon to-right"
+                            <a id="other_message" class="ts-btn pull-right set-icon to-right"
                                style="background: #3498DB;margin-bottom: 10px;">
                                 <span>偷看下别人的留言，咳咳</span>
                                 <small>Praesent at enim vel nibh</small>
                                 <i class="fa fa-arrow-circle-right"></i>
                             </a>
-                            <a id="my_message"  class="ts-btn pull-right set-icon to-right">
+                            <a id="my_message" class="ts-btn pull-right set-icon to-right">
                                 <span>我也留个言</span>
                                 <small>Praesent at enim vel nibh</small>
                                 <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
-                                <div id="message" style="display: none">
-                                <div class="cd-testimonials-wrapper cd-container">
-                                    <ul class="cd-testimonials">
-                                        <li>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                            <div class="cd-author">
-                                                <img src="/static/img/avatar-1.jpg" alt="Author image">
-                                                <ul class="cd-author-info">
-                                                    <li>MyName</li>
-                                                    <li>CEO, AmberCreative</li>
-                                                </ul>
+                        <!--看别人的留言开始-->
+                        <div id="message" style="display: none">
+                            <div class="demo" style="padding: 1em 0;min-height: 350px;">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-6">
+                                            <div class="panel-group" id="accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="headingOne">
+                                                        <h4 class="panel-title">
+                                                            <a id="a1" role="button" data-toggle="collapse"
+                                                               data-parent="#accordion" href="#collapseOne"
+                                                               aria-expanded="true" aria-controls="collapseOne">
+                                                                Section 1
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseOne" class="panel-collapse collapse in"
+                                                         role="tabpanel" aria-labelledby="headingOne">
+                                                        <div class="panel-body">
+                                                            <p id="p1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                Praesent nisl lorem, dictum id pellentesque at,
+                                                                vestibulum ut arcu. Curabitur erat libero, egestas eu
+                                                                tincidunt ac, rutrum ac justo. Vivamus condimentum
+                                                                laoreet lectus, blandit posuere tortor aliquam vitae.
+                                                                Curabitur molestie eros. </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="headingTwo">
+                                                        <h4 class="panel-title">
+                                                            <a id="a2" class="collapsed" role="button" data-toggle="collapse"
+                                                               data-parent="#accordion" href="#collapseTwo"
+                                                               aria-expanded="false" aria-controls="collapseTwo">
+                                                                Section 2
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseTwo" class="panel-collapse collapse"
+                                                         role="tabpanel" aria-labelledby="headingTwo">
+                                                        <div class="panel-body">
+                                                            <p id="p2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                Praesent nisl lorem, dictum id pellentesque at,
+                                                                vestibulum ut arcu. Curabitur erat libero, egestas eu
+                                                                tincidunt ac, rutrum ac justo. Vivamus condimentum
+                                                                laoreet lectus, blandit posuere tortor aliquam vitae.
+                                                                Curabitur molestie eros. </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="headingThree">
+                                                        <h4 class="panel-title">
+                                                            <a id="a3" class="collapsed" role="button" data-toggle="collapse"
+                                                               data-parent="#accordion" href="#collapseThree"
+                                                               aria-expanded="false" aria-controls="collapseThree">
+                                                                Section 3
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseThree" class="panel-collapse collapse"
+                                                         role="tabpanel" aria-labelledby="headingThree">
+                                                        <div class="panel-body">
+                                                            <p id="p3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                Praesent nisl lorem, dictum id pellentesque at,
+                                                                vestibulum ut arcu. Curabitur erat libero, egestas eu
+                                                                tincidunt ac, rutrum ac justo. Vivamus condimentum
+                                                                laoreet lectus, blandit posuere tortor aliquam vitae.
+                                                                Curabitur molestie eros. </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </li>
-
-                                        <li>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus ea, perferendis error repudiandae numquam dolor fuga temporibus. Unde omnis, consequuntur.</p>
-                                            <div class="cd-author">
-                                                <img src="/static/img/avatar-2.jpg" alt="Author image">
-                                                <ul class="cd-author-info">
-                                                    <li>MyName</li>
-                                                    <li>Designer, CodyHouse</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam totam nulla est, illo molestiae maxime officiis, quae ad, ipsum vitae deserunt molestias eius alias.</p>
-                                            <div class="cd-author">
-                                                <img src="/static/img/avatar-3.jpg" alt="Author image">
-                                                <ul class="cd-author-info">
-                                                    <li>MyName</li>
-                                                    <li>CEO, CompanyName</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-
-                                    </ul> <!-- cd-testimonials -->
-
-                                    <a href="#0" class="cd-see-all">See all</a>
-                                </div> <!-- cd-testimonials-wrapper -->
-
-                                <div class="cd-testimonials-all">
-                                    <div class="cd-testimonials-all-wrapper">
-                                        <ul>
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit totam saepe iste maiores neque animi molestias nihil illum nisi temporibus.</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-1.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nostrum nisi, doloremque error hic nam nemo doloribus porro impedit perferendis. Tempora, distinctio hic suscipit. At ullam eaque atque recusandae modi fugiat voluptatem laborum laboriosam rerum, consequatur reprehenderit omnis, enim pariatur nam, quidem, quas vel reiciendis aspernatur consequuntur. Commodi quasi enim, nisi alias fugit architecto, doloremque, eligendi quam autem exercitationem consectetur.</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-2.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem quibusdam eveniet, molestiae laborum voluptatibus minima hic quasi accusamus ut facere, eius expedita, voluptatem? Repellat incidunt veniam quaerat, qui laboriosam dicta. Quidem ducimus laudantium dolorum enim qui at ipsum, a error.</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-3.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero voluptates officiis tempore quae officia! Beatae quia deleniti cum corporis eos perferendis libero reiciendis nemo iusto accusamus, debitis tempora voluptas praesentium repudiandae laboriosam excepturi laborum, nisi optio repellat explicabo, incidunt ex numquam. Ullam perferendis officiis harum doloribus quae corrupti minima quia, aliquam nostrum expedita pariatur maxime repellat, voluptas sunt unde, inventore.</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-4.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit totam saepe iste maiores neque animi molestias nihil illum nisi temporibus.</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-5.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis quia quas, quis illo adipisci voluptate ex harum iste commodi nulla dolor. Eius ratione quod ab!</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-6.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, dignissimos iure rem fugiat consequuntur officiis.</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-1.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At temporibus tempora necessitatibus reiciendis provident deserunt maxime sit id. Dicta aut voluptatibus placeat quibusdam vel, dolore.</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-2.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis iusto sapiente, excepturi velit, beatae possimus est tenetur cumque fugit tempore dolore fugiat! Recusandae, vel suscipit? Perspiciatis non similique sint suscipit officia illo, accusamus dolorum, voluptate vitae quia ea amet optio magni voluptatem nemo, natus nihil.</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-3.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor quasi officiis pariatur, fugit minus omnis animi ut assumenda quod commodi, ad a alias maxime unde suscipit magnam, voluptas laboriosam ipsam quibusdam quidem, dolorem deleniti id.</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-4.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At temporibus tempora necessitatibus reiciendis provident deserunt maxime sit id. Dicta aut voluptatibus placeat quibusdam vel, dolore.</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-5.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-
-                                            <li class="cd-testimonials-item">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque tempore ipsam, eos suscipit nostrum molestias reprehenderit, rerum amet cum similique a, ipsum soluta delectus explicabo nihil repellat incidunt! Minima magni possimus mollitia deserunt facere, tempore earum modi, ea ipsa dicta temporibus suscipit quidem ut quibusdam vero voluptatibus nostrum excepturi explicabo nulla harum, molestiae alias. Ab, quidem rem fugit delectus quod.</p>
-
-                                                <div class="cd-author">
-                                                    <img src="/static/img/avatar-6.jpg" alt="Author image">
-                                                    <ul class="cd-author-info">
-                                                        <li>MyName</li>
-                                                        <li>CEO, CompanyName</li>
-                                                    </ul>
-                                                </div> <!-- cd-author -->
-                                            </li>
-                                        </ul>
-                                    </div>	<!-- cd-testimonials-all-wrapper -->
-
-                                    <a href="#0" class="close-btn">Close</a>
-                                </div> <!-- cd-testimonials-all -->
+                                        </div>
+                                        <!--分页-->
+                                        <ul id="messagePage"></ul>
+                                    </div>
                                 </div>
-                        <article class="container" style="display: none">
-                            <div>
-                                <section class="content bgcolor-4">
-                                    <h2></h2>
-                                    <span class="input input--akira">
-                                        <input class="input__field input__field--akira" type="text" id="input-23"/>
-                                        <label class="input__label input__label--akira" for="input-23">
-                                            <span class="input__label-content input__label-content--akira">Last Name</span>
-                                        </label>
-                                    </span>
-                                </section>
                             </div>
-                        </article>
+                        </div>
+                        <!--结束-->
+
+
+                        <!--写留言开始-->
+                        <div class="container" id="container" style="display: none">
+
+                                <form action="/save_message">
+                                    <h2 style="margin-bottom: 20px">来，把你想说的话说出来。。。。</h2>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <textarea style="height: 150px;width: 100%;background: #3498db;opacity: 0.8"  name="message" type="text"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px">
+                                        <div class="col-xs-8">
+
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <input type="submit" class="btn"  style="background: #3498db" value="确定">
+                                        </div>
+                                    </div>
+                                </form>
+                        </div>
+                        <!--写留言结束-->
                     </div>
                 </div>
             </div>
@@ -343,47 +315,11 @@
 <script src="/static/js/page.js"></script>
 <!--bootstrap引入-->
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<!--输入的特效-->
-<script>
-    //
-    (function() {
-        if (!String.prototype.trim) {
-            (function() {
-                // Make sure we trim BOM and NBSP
-                var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-                String.prototype.trim = function() {
-                    return this.replace(rtrim, '');
-                };
-            })();
-        }
-
-        [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
-            // in case the input is already filled..
-            if( inputEl.value.trim() !== '' ) {
-                classie.add( inputEl.parentNode, 'input--filled' );
-            }
-
-            // events:
-            inputEl.addEventListener( 'focus', onInputFocus );
-            inputEl.addEventListener( 'blur', onInputBlur );
-        } );
-
-        function onInputFocus( ev ) {
-            classie.add( ev.target.parentNode, 'input--filled' );
-        }
-
-        function onInputBlur( ev ) {
-            if( ev.target.value.trim() === '' ) {
-                classie.remove( ev.target.parentNode, 'input--filled' );
-            }
-        }
-    })();
-</script>
-<!--输入特效结束-->
 <script type="text/javascript">
+    //点击跳转的操作
     $(function () {
-        var status=$("#status").val();
-        if(status =="success"){
+        var status = $("#status").val();
+        if (status == "success") {
             $('.ts-item').eq(0).find(".ts-content").css("display", "none");
             $('.ts-item').eq(0).find("article").css("display", "block");
             $('.ts-item').eq(0).find(".container").css("display", "block")
@@ -404,14 +340,15 @@
         $("#other_message").click(function () {
             $('.ts-item').eq(2).find(".ts-content").css("display", "none");
             $('.ts-item').eq(2).find("#message").css("display", "block");
-            $('.ts-item').eq(2).find(".container").css("display", "none");
+
+            $('.ts-item').eq(2).find("#container").css("display", "none");
         })
         //自己写留言
         $("#my_message").click(function () {
             $('.ts-item').eq(2).find(".ts-content").css("display", "none");
-            $('.ts-item').eq(2).find(".container").css("display", "block");
+            $('.ts-item').eq(2).find("#container").css("display", "block");
         })
-        
+
         //$('a').on('click', function(){ return false; });
         // set item banner
         $('.ts-item').first().show();
@@ -438,31 +375,30 @@
             $('.ts-item').eq(2).find(".ts-content").css("display", "block");
             $('.ts-item').eq(2).find("#message").css("display", "none");
 
-            $('.ts-item').eq(2).find(".container").css("display", "none");
+            $('.ts-item').eq(2).find("#container").css("display", "none");
             return false;
         });
         var ww = $(window).width();
     });
     //加载列表数据
     $(function () {
-        //分页处理
+        //音乐分页处理
         pageStart();//开始分页
-
         function pageStart() {//分页函数
             $.ajax({ //去后台查询第一页数据
-                type : "get",
-                url : "/find_music",
-                dataType : "json",
-                data : {page : '1',size:'1'}, //参数：当前页为1
-                success : function(data) {
-                    //alert(data)
+                type: "get",
+                url: "/find_music",
+                dataType: "json",
+                data: {page: '1', size: '3'}, //参数：当前页为1
+                success: function (data) {
                     appendHtml(data.list);//处理第一页的数据
+                    downLoad();
                     var options = {//根据后台返回的分页相关信息，设置插件参数
-                        bootstrapMajorVersion : 3, //如果是bootstrap3版本需要加此标识，并且设置包含分页内容的DOM元素为UL,如果是bootstrap2版本，则DOM包含元素是DIV
-                        currentPage : data.page, //当前页数
-                        totalPages : data.totalPage, //总页数
-                        numberOfPages : data.pageSize,//每页记录数
-                        itemTexts : function(type, page, current) {//设置分页按钮显示字体样式
+                        bootstrapMajorVersion: 3, //如果是bootstrap3版本需要加此标识，并且设置包含分页内容的DOM元素为UL,如果是bootstrap2版本，则DOM包含元素是DIV
+                        currentPage: data.page, //当前页数
+                        totalPages: data.totalPage, //总页数
+                        numberOfPages: data.pageSize,//每页记录数
+                        itemTexts: function (type, page, current) {//设置分页按钮显示字体样式
                             switch (type) {
                                 case "first":
                                     return "首页";
@@ -476,19 +412,22 @@
                                     return page;
                             }
                         },
-                        onPageClicked : function(event, originalEvent, type, page) {//分页按钮点击事件
+                        onPageClicked: function (event, originalEvent, type, page) {//分页按钮点击事件
                             $.ajax({//根据page去后台加载数据
-                                url : "/find_music",
-                                type : "get",
-                                dataType : "json",
-                                data : {"page" : page},
-                                success : function(data) {
+                                url: "/find_music",
+                                type: "get",
+                                dataType: "json",
+                                data: {"page": page, size: '3'},
+                                success: function (data) {
                                     appendHtml(data.list);//处理数据
+                                    music_click();
+                                    downLoad();
                                 }
                             });
                         }
                     };
                     $('#mypage').bootstrapPaginator(options);//设置分页
+                    music_click();
                 }
             });
         }
@@ -496,36 +435,111 @@
         //添加数据
         function appendHtml(list) {//此函数用于处理后台返回的数据，根据自己需求来实现页面拼接
             var tableShow = '';
+            tableShow += '<table class="table"><tr style="background: #3498db"><td>歌曲名</td><td>歌手</td><td>操作</td></tr>';
             for (var i = 0; i < list.length; i++) {
-                // tableShow += '<a href="news/'+list[i].id+'.do">';
-                tableShow += '<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" style="border-top: 0px">';
-                tableShow += '<div class="am-u-sm-4 am-list-thumb">';
-                // tableShow += '<img src="'+list[i].newsUrl+'"/>';
-                tableShow += '</div><div class=" am-u-sm-7 am-list-main">';
-                tableShow += '<h3 class="am-list-item-hd">' + list[i].name + '</h3>';
-                tableShow += '</div></li><div class="newsico am-fr">';
-                tableShow += '<i class="am-icon-clock-o  am-hide-sm-only">' + list[i].singer + '</i></div></a>';
-                tableShow += '<li class="play" id=' + list[i].path + '>'+ list[i].name+" &nbsp;  &nbsp; &nbsp; "+list[i].id +list[i].path+'</li>';
+                tableShow += '<tr class="row"><td class="col-xs-3">' + list[i].name + '</td>';
+                tableShow += '<td class="col-xs-3">' + list[i].singer + '<img src="'+list[i].imgPath+'"></td>';
+                tableShow += '<td class="col-xs-3"><button type="button" class="play btn btn-info" id=' + list[i].path + '><i class="fa fa-play-circle" aria-hidden="true"></i> </button> &nbsp;<a href="" type="button" id= '+list[i].path+' class="down btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i></a></td></tr>';
             }
+            tableShow += "</table>";
             $('.data-container').html(tableShow)
         }
 
         //歌曲的切换
-        $(".play").click(function(){
-            alert(1)
-            //获取到你所定义的音频标签
-            var audios = document.getElementById("music");
-            //获取当前歌曲的路径
-            var path=$(this).attr("id");
-            //停止播放
-            audios.pause();
-            //这种方式是js的，不是jq的方式设置src
-            audios.src=path;
-            //重新加载
-            audios.load();
-            //播放
-            audios.play();
-        })
+        music_click();
+        function music_click() {
+            //歌曲的切换
+            $(".play").click(function () {
+                //获取到你所定义的音频标签
+                var audios = document.getElementById("music");
+                //获取当前歌曲的路径
+                var path = $(this).attr("id");
+                //停止播放
+                audios.pause();
+                //这种方式是js的，不是jq的方式设置src
+                audios.src = path;
+                //重新加载
+                audios.load();
+                //播放
+                audios.play();
+            })
+        }
+        //留言部分的分页实现
+        messagePageStart();
+        function messagePageStart() {//分页函数
+            $.ajax({ //去后台查询第一页数据
+                type: "get",
+                url: "/find_message",
+                dataType: "json",
+                data: {page: '1', size: '3'}, //参数：当前页为1
+                success: function (data) {
+                    updateMessage(data.list);
+                    //alert(data.list[0].message);
+                    //appendHtml(data.list);//处理第一页的数据
+                    var options = {//根据后台返回的分页相关信息，设置插件参数
+                        bootstrapMajorVersion: 3, //如果是bootstrap3版本需要加此标识，并且设置包含分页内容的DOM元素为UL,如果是bootstrap2版本，则DOM包含元素是DIV
+                        currentPage: data.page, //当前页数
+                        totalPages: data.totalPage, //总页数
+                        numberOfPages: data.pageSize,//每页记录数
+                        itemTexts: function (type, page, current) {//设置分页按钮显示字体样式
+                            switch (type) {
+                                case "first":
+                                    return "首页";
+                                case "prev":
+                                    return "上一页";
+                                case "next":
+                                    return "下一页";
+                                case "last":
+                                    return "末页";
+                                case "page":
+                                    return page;
+                            }
+                        },
+                        onPageClicked: function (event, originalEvent, type, page) {//分页按钮点击事件
+                            $.ajax({//根据page去后台加载数据
+                                url: "/find_message",
+                                type: "get",
+                                dataType: "json",
+                                data: {"page": page, size: '3'},
+                                success: function (data) {
+                                    updateMessage(data.list);
+                                    //appendHtml(data.list);//处理数据
+                                }
+                            });
+                        }
+                    };
+                    $('#messagePage').bootstrapPaginator(options);//设置分页
+                }
+            });
+        }
+
+        //对留言板的内容进行替换
+        function updateMessage(list) {
+            for (var i = 0; i < list.length; i++) {
+                $("#p"+(i+1)).text(list[i].message);
+                $("#a"+(i+1)).text(getLocalTime(list[i].date));
+            }
+        }
+        //时间戳转成时间
+        function getLocalTime(nS) {
+            return new Date(parseInt(nS)).toLocaleString();
+        }
+
+        //下载请求
+        function downLoad(){
+            $(".down").click(function () {
+                var path=$(this).attr("id");// /static/music/Amy.mp3
+                var localObj = window.location; //这个的意思是获取当前页面的地址
+                var protocol = location.protocol; //获取http或https
+                var host = localObj.host; //获取JSP地址栏IP和端口号 //localhost:8080
+                var contextPath = localObj.pathname.split("/")[1]; //获取项目名
+                var basePath = protocol +"//"+host;
+                alert(basePath);
+                var url = basePath+"/download?filename="+encodeURI(encodeURI(path));
+                $(this).attr("href",url);
+            })
+        }
+
     });
 </script>
 </body>

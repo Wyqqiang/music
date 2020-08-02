@@ -29,6 +29,9 @@ public class Message implements Serializable {
     @Column
     private Date date;
 
+    public Message() {
+    }
+
     public Message(String message, Date date) {
         this.message = message;
         this.date = date;
